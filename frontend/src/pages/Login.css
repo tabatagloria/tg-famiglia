@@ -1,0 +1,71 @@
+.Login {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../assets/wallpaper.png");
+    min-height: 100vh;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+   
+.Login p {
+    font-family: 'Carattere', cursive;
+    font-size: 45px;
+    font-weight: bold;
+  }
+
+.Login form {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Login form input {
+    margin-top: 3px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.Logar {
+    margin-top: 10px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid #0e95c5;
+    background-color:  #0e95c5;
+    font-size: medium;
+    color: #bae097;
+    font-weight: bold;   
+}
+
+.Cancel {
+    margin-top: 5px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid  #ff0000;
+    background-color:   #ff0000;
+    color: #bae097;
+    font-size: medium;
+    font-weight: bold;   
+}
+
+.Login a {
+    color: white;
+    font-size: medium;
+    margin-top: 5px;
+    
+}
+
+::-webkit-input-placeholder {
+    font-size: medium;
+}
+
+img {
+    height: 250px;
+}
+  
+  
