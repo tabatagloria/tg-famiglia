@@ -1,30 +1,20 @@
 {
-  "name": "rest",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "curso de rest api",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js"
   },
-  "keywords": [
-    "node",
-    "tutorial"
-  ],
   "author": "Tábata Glória",
-  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "morgan": "^1.10.0",
-    "mysql": "^2.18.1",
     "mysql2": "^2.3.2",
-    "sequelize": "^6.7.0"
+    "sequelize": "^6.9.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.13",
+    "nodemon": "^2.0.14",
     "sequelize-cli": "^6.2.0"
-    
   }
 }
-

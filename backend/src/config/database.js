@@ -1,3 +1,4 @@
+
 module.exports = {
     dialect: 'mysql',
     host: 'localhost',
@@ -5,7 +6,7 @@ module.exports = {
     password: 'root',
     database: 'famiglia',
     define: {
-        timestamps: true,
+        timestamps: true, 
         underscored: true,
     }
-}
+};
