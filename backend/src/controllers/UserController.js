@@ -6,7 +6,7 @@ module.exports = {
             const users = await User.findAll();
             return res.json(users);
         }catch(error){
-            return res.json(error);
+            return res.status(404).json({erro: 'Not Found'});
         }       
     },
 
