@@ -16,6 +16,7 @@ routes.put('/users', UserController.update);
 routes.get('/users/:user_id/cadastro_familia', FamiliarController.index);
 routes.post('/users/:user_id/cadastro_familia', FamiliarController.store);
 routes.put('/users/:user_id/cadastro_familia', FamiliarController.update);
+routes.delete('/users/:user_id/cadastro_familia', FamiliarController.delete);
 
 
 

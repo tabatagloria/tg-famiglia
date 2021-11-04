@@ -2,6 +2,20 @@ const Familiar = require('../models/Familiar');
 const User = require('../models/User');
 
 module.exports= {
+    async search(req, res){
+        try{
+            const pessoas = await Familiar.findAll({
+                where: {
+                    nome: req.body
+                }
+            });
+            return res.json(pessoas);
+        }catch(error){
+            return res.status(404).json({erro: 'Not Found'});
+        }        res.status(404).json({erro: 'Not Found'});
+      
+    },
+
     async index(req, res){
         try{
         const  { user_id } = req.params;
@@ -63,4 +77,22 @@ module.exports= {
             }
         }
     },
+    async delete(req, res){
+        try{
+        const { user_id } = req.params;        
+        const user = await User.findByPk(user_id);
+    
+        if(!user){
+            return res.status(400).json({ error: 'User not found'});
+        }
+        const familia_delete = await Familiar.findByPk(req.body.id);
+        familia_delete.destroy();
+
+        return res.status(200).json({ message: 'Cadastro deletado com sucesso' });
+        }catch(error){
+            if (error){
+                return res.status(404).json({erro: 'Cadastro não encontrado'});
+            }
+        }
+    }
 };
