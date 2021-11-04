@@ -13,6 +13,7 @@ routes.put('/users', UserController.update);
 
 
 //Rotas de Familiar
+routes.get('/users/:user_id/cadastro_familia', FamiliarController.index);
 routes.post('/users/:user_id/cadastro_familia', FamiliarController.store);
 
 

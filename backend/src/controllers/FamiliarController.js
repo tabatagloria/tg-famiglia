@@ -2,10 +2,23 @@ const Familiar = require('../models/Familiar');
 const User = require('../models/User');
 
 module.exports= {
+    async index(req, res){
+        try{
+            const  { user_id } = req.params;
+        const user = await User.findByPk(user_id, {
+            include: { association: 'familiares' }
+        });
+
+        return res.json(user.familiares); 
+    }catch {
+        return res.status(404).json({erro: 'Not Found'});}
+
+        
+    },
+
     async store(req, res) {
         const { user_id } = req.params;
         const { nome, 
-            parentesco, 
             data_nascimento, 
             casado, 
             data_casamento,
@@ -19,7 +32,6 @@ module.exports= {
         }
         const cadastro_familiar = await Familiar.create({
             nome, 
-            parentesco, 
             data_nascimento, 
             casado, 
             data_casamento,

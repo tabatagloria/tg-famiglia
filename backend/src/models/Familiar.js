@@ -4,7 +4,6 @@ class Familiar extends Model {
     static init(sequelize){
         super.init({
             nome: DataTypes.STRING, 
-            parentesco: DataTypes.STRING, 
             data_nascimento: DataTypes.STRING, 
             casado: DataTypes.STRING, 
             data_casamento: DataTypes.STRING, 
@@ -12,7 +11,7 @@ class Familiar extends Model {
             data_obito: DataTypes.STRING, 
         }, {
             sequelize,
-            tableName: 'familiares_cadastro'
+            tableName: 'familiares2'
         })
     }
     static associate(models){

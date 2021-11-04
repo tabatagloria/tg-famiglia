@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('familiares_cada', { 
+    await queryInterface.createTable('familiares2', { 
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -17,10 +17,6 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       nome: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      parentesco: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -52,7 +48,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-     await queryInterface.dropTable('familiares');
+     await queryInterface.dropTable('familiares2');
      
   }
 };
