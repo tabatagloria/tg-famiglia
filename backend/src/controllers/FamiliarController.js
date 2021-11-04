@@ -4,7 +4,7 @@ const User = require('../models/User');
 module.exports= {
     async index(req, res){
         try{
-            const  { user_id } = req.params;
+        const  { user_id } = req.params;
         const user = await User.findByPk(user_id, {
             include: { association: 'familiares' }
         });
@@ -12,8 +12,7 @@ module.exports= {
         return res.json(user.familiares); 
     }catch {
         return res.status(404).json({erro: 'Not Found'});}
-
-        
+      
     },
 
     async store(req, res) {
@@ -40,5 +39,28 @@ module.exports= {
             user_id,
         })
         return res.status(200).json({ message: 'Cadastro realizado com sucesso' });
-    }
+    },
+
+    async update(req, res){
+        try{
+
+        const { user_id } = req.params;        
+        const user = await User.findByPk(user_id);
+
+        if(!user){
+            return res.status(400).json({ error: 'User not found'});
+        }
+
+        const familiar_update = await Familiar.findByPk(req.body.id);
+        familiar_update.update(req.body);
+
+        const resultadoSave = await familiar_update.save();
+        
+        return res.status(201).json({ message: 'Alteração realizada com sucesso' });
+        }catch(error){
+            if (error){
+                return res.status(404).json({erro: 'Usuário não encontrado'});
+            }
+        }
+    },
 };
