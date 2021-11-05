@@ -35,5 +35,26 @@ module.exports= {
         })
         return res.status(200).json({ message: 'Cadastro realizado com sucesso' });  
     },
+    async update(req, res){
+        try{
+            const { user_id } = req.params;        
+            const user = await User.findByPk(user_id);
+
+            if(!user){
+                return res.status(400).json({ error: 'User not found'});
+            }
+
+            const perfil_update = await Perfil.findByPk(req.body.id);
+            perfil_update.update(req.body);
+
+            const resultadoSave = await perfil_update.save();
+            
+            return res.status(201).json({ message: 'Alteração realizada com sucesso' });
+            }catch(error){
+                if (error){
+                    return res.status(404).json({erro: 'Usuário não encontrado'});
+                }
+            }
+    },
 
 };

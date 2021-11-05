@@ -29,6 +29,7 @@ routes.delete('/users/:user_id/cadastro_familia', FamiliarController.delete);
 //Rotas Perfil
 routes.get('/users/:user_id/cadastro_perfil', PerfilController.index);
 routes.post('/users/:user_id/cadastro_perfil', PerfilController.store);
+routes.put('/users/:user_id/cadastro_perfil', PerfilController.update);
 
 
 //CORS
