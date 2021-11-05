@@ -12,6 +12,7 @@ class User extends Model {
     }
     static associate(models){
         this.hasMany(models.Familiar, { foreignKey: 'user_id', as: 'familiares' });
+        this.hasOne(models.Perfil, { foreignKey: 'user_id', as: 'perfil' });
     }
 }
 module.exports = User;

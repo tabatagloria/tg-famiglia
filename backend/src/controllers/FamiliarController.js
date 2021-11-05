@@ -2,19 +2,7 @@ const Familiar = require('../models/Familiar');
 const User = require('../models/User');
 
 module.exports= {
-    async search(req, res){
-        try{
-            const pessoas = await Familiar.findAll({
-                where: {
-                    nome: req.body
-                }
-            });
-            return res.json(pessoas);
-        }catch(error){
-            return res.status(404).json({erro: 'Not Found'});
-        }        res.status(404).json({erro: 'Not Found'});
-      
-    },
+    
 
     async index(req, res){
         try{

@@ -1,8 +1,10 @@
 const express = require('express');
-const UserController = require('./controllers/UserController');
-const FamiliarController = require('./controllers/FamiliarController');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+
+const UserController = require('./controllers/UserController');
+const FamiliarController = require('./controllers/FamiliarController');
+const PerfilController = require('./controllers/PerfilController');
 
 
 const routes = express.Router();
@@ -24,7 +26,12 @@ routes.post('/users/:user_id/cadastro_familia', FamiliarController.store);
 routes.put('/users/:user_id/cadastro_familia', FamiliarController.update);
 routes.delete('/users/:user_id/cadastro_familia', FamiliarController.delete);
 
+//Rotas Perfil
+routes.get('/users/:user_id/cadastro_perfil', PerfilController.index);
+routes.post('/users/:user_id/cadastro_perfil', PerfilController.store);
 
+
+//CORS
 routes.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header(
