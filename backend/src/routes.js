@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const UserController = require('./controllers/UserController');
 const FamiliarController = require('./controllers/FamiliarController');
 const PerfilController = require('./controllers/PerfilController');
+const DocumentoController = require('./controllers/DocumentoController');
 
 
 const routes = express.Router();
@@ -32,6 +33,11 @@ routes.post('/users/:user_id/cadastro_perfil', PerfilController.store);
 routes.put('/users/:user_id/cadastro_perfil', PerfilController.update);
 routes.delete('/users/:user_id/cadastro_perfil', PerfilController.delete);
 
+//Rotas Documentos
+//routes.get('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.index);
+routes.post('/cadastro_familia/:familiar_id/docs', DocumentoController.store);
+//routes.put('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.update);
+//routes.delete('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.delete);
 
 //CORS
 routes.use((req, res, next) => {

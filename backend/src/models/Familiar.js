@@ -16,6 +16,7 @@ class Familiar extends Model {
     }
     static associate(models){
         this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+        this.belongsToMany(models.Documento, {foreignKey: 'familiar_id', through: 'familia_docs', as: 'documentos' });
     }
 }
 module.exports = Familiar;
