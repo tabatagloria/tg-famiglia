@@ -3,7 +3,6 @@ const User = require('../models/User');
 
 module.exports= {
     
-
     async index(req, res){
         try{
         const  { user_id } = req.params;

@@ -56,5 +56,22 @@ module.exports= {
                 }
             }
     },
+    async delete(req, res){
+        try{
+        const { user_id } = req.params;        
+        const user = await User.findByPk(user_id);
+    
+        if(!user){
+            return res.status(400).json({ error: 'User not found'});
+        }
+        const perfil_delete = await Perfil.findByPk(req.body.id);
+        perfil_delete.destroy();
 
+        return res.status(200).json({ message: 'Perfil deletado com sucesso' });
+        }catch(error){
+            if (error){
+                return res.status(404).json({erro: 'Perfil não encontrado'});
+            }
+        }
+    }
 };

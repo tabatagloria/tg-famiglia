@@ -30,6 +30,7 @@ routes.delete('/users/:user_id/cadastro_familia', FamiliarController.delete);
 routes.get('/users/:user_id/cadastro_perfil', PerfilController.index);
 routes.post('/users/:user_id/cadastro_perfil', PerfilController.store);
 routes.put('/users/:user_id/cadastro_perfil', PerfilController.update);
+routes.delete('/users/:user_id/cadastro_perfil', PerfilController.delete);
 
 
 //CORS
