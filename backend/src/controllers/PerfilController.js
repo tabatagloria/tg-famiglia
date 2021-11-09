@@ -11,13 +11,16 @@ module.exports= {
             });
     
             return res.json(user.perfil); 
-        }catch {
-            return res.status(404).json({erro: 'Not Found'});} 
-        },
+        }catch(error) {
+            if(error){
+                return res.status(404).json({erro: 'Not Found'});
+            }
+        } 
+    },
 
-      
     async store(req, res) {
-        const { user_id } = req.params;
+        try{
+            const { user_id } = req.params;
         const { email, 
             data_nascimento, 
             sobrenomes} = req.body;
@@ -34,6 +37,12 @@ module.exports= {
             user_id
         })
         return res.status(200).json({ message: 'Cadastro realizado com sucesso' });  
+        } catch(error){
+            if(error){
+                return res.status(404).json({erro: 'Not Found'});
+            }
+        }
+        
     },
     async update(req, res){
         try{

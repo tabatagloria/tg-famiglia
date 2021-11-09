@@ -6,6 +6,8 @@ const UserController = require('./controllers/UserController');
 const FamiliarController = require('./controllers/FamiliarController');
 const PerfilController = require('./controllers/PerfilController');
 const DocumentoController = require('./controllers/DocumentoController');
+const TipoCidadaniaController = require('./controllers/TipoCidadaniaController');
+const BuscaController = require('./controllers/BuscaController');
 
 
 const routes = express.Router();
@@ -34,10 +36,17 @@ routes.put('/users/:user_id/cadastro_perfil', PerfilController.update);
 routes.delete('/users/:user_id/cadastro_perfil', PerfilController.delete);
 
 //Rotas Documentos
-//routes.get('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.index);
-routes.post('/cadastro_familia/:familiar_id/docs', DocumentoController.store);
-//routes.put('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.update);
-//routes.delete('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.delete);
+routes.get('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.index);
+routes.post('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.store);
+routes.put('/users/:user_id/cadastro_familia/:familiar_id/docs/:local_id', DocumentoController.update);
+routes.delete('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.delete);
+
+
+//Tipo Cidadania
+routes.post('/tipo_cidadania', TipoCidadaniaController.store);
+
+//Busca
+routes.get('/busca', BuscaController.show);
 
 //CORS
 routes.use((req, res, next) => {
