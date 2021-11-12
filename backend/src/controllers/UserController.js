@@ -1,9 +1,15 @@
 const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+
+
 
 module.exports = {
+
     async index(req, res){
         try{
-            const users = await User.findAll();
+            const users = await User.findAll({
+                attributes: ['name', 'user_name'],
+            });
             return res.json(users);
         }catch(error){
             if(error){
@@ -13,17 +19,14 @@ module.exports = {
     },
 
     async store(req, res) {
-        try{
-        const { name, user_name, password } = req.body;
+        
+        const { password } = req.body;
+        const hash  = await bcrypt.hash(password, 10);
+        req.body.password = hash;
 
-        const user = await User.create({ name, user_name, password });
+        const {name, user_name} = await User.create(req.body);
 
         return res.status(200).json({ message: 'Cadastro realizado com sucesso' });
-        }catch(error){
-            if (error){
-                return res.status(412).json({erro: 'Preenchimento inválido'});
-            }
-        }
     },
 
     async delete(req, res){

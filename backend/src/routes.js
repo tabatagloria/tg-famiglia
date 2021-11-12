@@ -8,6 +8,8 @@ const PerfilController = require('./controllers/PerfilController');
 const DocumentoController = require('./controllers/DocumentoController');
 const TipoCidadaniaController = require('./controllers/TipoCidadaniaController');
 const BuscaController = require('./controllers/BuscaController');
+const ParentescoController = require('./controllers/ParentescoController');
+const LoginController = require('./controllers/LoginController');
 
 
 const routes = express.Router();
@@ -38,7 +40,6 @@ routes.delete('/users/:user_id/cadastro_perfil', PerfilController.delete);
 //Rotas Documentos
 routes.get('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.index);
 routes.post('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.store);
-routes.put('/users/:user_id/cadastro_familia/:familiar_id/docs/:local_id', DocumentoController.update);
 routes.delete('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.delete);
 
 
@@ -47,6 +48,14 @@ routes.post('/tipo_cidadania', TipoCidadaniaController.store);
 
 //Busca
 routes.get('/busca', BuscaController.show);
+
+//Parentesco
+routes.get('/users/:user_id/cadastro_familia/:familiar_id/parentesco', ParentescoController.index);
+routes.post('/users/:user_id/cadastro_familia/:familiar_id/parentesco', ParentescoController.store);
+routes.delete('/users/:user_id/cadastro_familia/:familiar_id/parentesco', ParentescoController.delete);
+
+//Login
+routes.post('/authenticate', LoginController.login);
 
 //CORS
 routes.use((req, res, next) => {

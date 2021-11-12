@@ -1,6 +1,6 @@
 const Familiar = require('../models/Familiar');
 const User = require('../models/User');
-const Documento = require('../models/Documento');
+const Parentesco = require('../models/Parentesco');
 
 
 module.exports= {
@@ -10,20 +10,21 @@ module.exports= {
 
         const user = await User.findByPk(user_id);
         const familiar = await Familiar.findByPk(familiar_id, {
-            include: {association: 'documentos',
-            attributes: ['local'],
+            include: {association: 'parentescos',
+            attributes: ['grau_parentesco'],
             through: { 
                 attributes: []}
          } }); 
-        return res.json(familiar.documentos);
+        return res.json(familiar.parentescos);
 
     },
+   
     async store(req, res) {
         try{
             const { user_id } = req.params;
             const { familiar_id } = req.params;
 
-            const { local } = req.body;
+            const { grau_parentesco } = req.body;
     
             const user = await User.findByPk(user_id);
             const familiar = await Familiar.findByPk(familiar_id);
@@ -32,13 +33,13 @@ module.exports= {
                 return res.status(400).json({ error: 'User not found'});
             }
     
-            const [ docs ] = await Documento.findOrCreate({
-                where: { local }
+            const [ parentesco ] = await Parentesco.findOrCreate({
+                where: { grau_parentesco }
             });
-            await familiar.addDocumento(docs);
+            await familiar.addParentesco(parentesco);
     
             return res.status(200).json({ message: 'Cadastro realizado com sucesso' });
-        } catch(error){
+        }catch(error){
             if(error){
                 return res.status(404).json({erro: 'Not Found'});
             }
@@ -49,7 +50,7 @@ module.exports= {
         try{
         const { user_id } = req.params; 
         const { familiar_id } = req.params;
-        const { local } = req.body;
+        const { grau_parentesco } = req.body;
 
         const user = await User.findByPk(user_id);
         const familiar = await Familiar.findByPk(familiar_id);
@@ -57,10 +58,10 @@ module.exports= {
         if(!user || !familiar){
             return res.status(400).json({ error: 'User not found'});
         }
-        const docs = await Documento.findOne({
-            where: { local }
+        const parentesco = await Parentesco.findOne({
+            where: { grau_parentesco }
         });
-        await familiar.removeDocumento(docs);
+        await familiar.removeParentesco(parentesco);
 
         return res.status(200).json({ message: 'Cadastro deletado com sucesso' });
         }catch(error){

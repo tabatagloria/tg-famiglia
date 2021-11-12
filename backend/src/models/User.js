@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcryptjs');
 
 class User extends Model {
     static init(sequelize){
@@ -7,7 +8,15 @@ class User extends Model {
             user_name: DataTypes.STRING,
             password: DataTypes.STRING
         }, {
-            sequelize
+            sequelize,
+            instanceMethods: {
+                generateHash(password) {
+                    return bcrypt.hash(password, bcrypt.genSaltSync(8));
+                },
+                validPassword(password) {
+                    return bcrypt.compare(password, this.password);
+                }
+            }
         })
     }
     static associate(models){
