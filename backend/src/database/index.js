@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const dbConfig = require('../config/database');
-const bodyParser = require('body-parser');
+
 
 const User = require('../models/User');
 const Familiar = require('../models/Familiar');
@@ -9,6 +9,8 @@ const Documento = require('../models/Documento');
 const Parentesco = require('../models/Parentesco');
 
 const connection = new Sequelize(dbConfig);
+
+
 
 User.init(connection);
 Familiar.init(connection);
