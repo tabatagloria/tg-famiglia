@@ -25,7 +25,7 @@ module.exports = {
             req.body.password = hash;
     
             const {name, user_name} = await User.create(req.body);
-    
+            
             return res.status(200).json({ message: 'Cadastro realizado com sucesso' });
         }catch(error) {
             if (error){
