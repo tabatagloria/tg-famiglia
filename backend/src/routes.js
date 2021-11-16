@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const authMiddleWare = require('./middlewares/auth');
+
 
 const UserController = require('./controllers/UserController');
 const FamiliarController = require('./controllers/FamiliarController');
@@ -13,7 +15,6 @@ const LoginController = require('./controllers/LoginController');
 
 
 const routes = express.Router();
-
 routes.use(morgan('dev'));
 routes.use(bodyParser.urlencoded({ extended: false }));
 routes.use(bodyParser.json());
@@ -26,21 +27,22 @@ routes.put('/users', UserController.update);
 
 
 //Rotas de Familiar
-routes.get('/users/:user_id/cadastro_familia', FamiliarController.index);
-routes.post('/users/:user_id/cadastro_familia', FamiliarController.store);
-routes.put('/users/:user_id/cadastro_familia', FamiliarController.update);
-routes.delete('/users/:user_id/cadastro_familia', FamiliarController.delete);
+
+routes.get('/users/:user_id/cadastro_familia', authMiddleWare, FamiliarController.index);
+routes.post('/users/:user_id/cadastro_familia', authMiddleWare, FamiliarController.store);
+routes.put('/users/:user_id/cadastro_familia', authMiddleWare, FamiliarController.update);
+routes.delete('/users/:user_id/cadastro_familia', authMiddleWare, FamiliarController.delete);
 
 //Rotas Perfil
-routes.get('/users/:user_id/cadastro_perfil', PerfilController.index);
-routes.post('/users/:user_id/cadastro_perfil', PerfilController.store);
-routes.put('/users/:user_id/cadastro_perfil', PerfilController.update);
-routes.delete('/users/:user_id/cadastro_perfil', PerfilController.delete);
+routes.get('/users/:user_id/cadastro_perfil', authMiddleWare, PerfilController.index);
+routes.post('/users/:user_id/cadastro_perfil', authMiddleWare, PerfilController.store);
+routes.put('/users/:user_id/cadastro_perfil', authMiddleWare, PerfilController.update);
+routes.delete('/users/:user_id/cadastro_perfil', authMiddleWare, PerfilController.delete);
 
 //Rotas Documentos
-routes.get('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.index);
-routes.post('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.store);
-routes.delete('/users/:user_id/cadastro_familia/:familiar_id/docs', DocumentoController.delete);
+routes.get('/users/:user_id/cadastro_familia/:familiar_id/docs', authMiddleWare, DocumentoController.index);
+routes.post('/users/:user_id/cadastro_familia/:familiar_id/docs', authMiddleWare, DocumentoController.store);
+routes.delete('/users/:user_id/cadastro_familia/:familiar_id/docs', authMiddleWare, DocumentoController.delete);
 
 
 //Tipo Cidadania
@@ -50,9 +52,9 @@ routes.post('/tipo_cidadania', TipoCidadaniaController.store);
 routes.get('/busca', BuscaController.show);
 
 //Parentesco
-routes.get('/users/:user_id/cadastro_familia/:familiar_id/parentesco', ParentescoController.index);
-routes.post('/users/:user_id/cadastro_familia/:familiar_id/parentesco', ParentescoController.store);
-routes.delete('/users/:user_id/cadastro_familia/:familiar_id/parentesco', ParentescoController.delete);
+routes.get('/users/:user_id/cadastro_familia/:familiar_id/parentesco', authMiddleWare, ParentescoController.index);
+routes.post('/users/:user_id/cadastro_familia/:familiar_id/parentesco', authMiddleWare, ParentescoController.store);
+routes.delete('/users/:user_id/cadastro_familia/:familiar_id/parentesco', authMiddleWare, ParentescoController.delete);
 
 //Login
 routes.post('/authenticate', LoginController.login);

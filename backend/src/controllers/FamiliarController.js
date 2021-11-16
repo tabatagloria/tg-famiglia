@@ -1,24 +1,25 @@
 const Familiar = require('../models/Familiar');
 const User = require('../models/User');
 
+
 module.exports= {
     
     async index(req, res){
         try{
-        const  { user_id } = req.params;
-        const user = await User.findByPk(user_id, {
+            const  { user_id } = req.params;
+            const user = await User.findByPk(user_id, {
             include: { association: 'familiares' }
         });
 
-        return res.json(user.familiares); 
-    }catch(error){
+        return res.send(user.familiares); 
+        }catch(error){
         if(error){
-            return res.status(404).json({erro: 'Not Found'});
+            return res.status(404).send({erro: 'Not Found'});
         }
         }
     },
 
-    async store(req, res) {
+    async store (req, res) {
         try{
             const { user_id } = req.params;
         const { nome, 
