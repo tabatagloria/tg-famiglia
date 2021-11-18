@@ -10,10 +10,10 @@ module.exports = {
             const users = await User.findAll({
                 attributes: ['name', 'user_name'],
             });
-            return res.json(users);
+            return res.send(users);
         }catch(error){
             if(error){
-                return res.status(404).json({erro: 'Not Found'});
+                return res.status(404).send({erro: 'Not Found'});
             }
         }       
     },
@@ -26,10 +26,10 @@ module.exports = {
     
             const {name, user_name} = await User.create(req.body);
             
-            return res.status(200).json({ message: 'Cadastro realizado com sucesso' });
+            return res.status(200).send({ message: 'Cadastro realizado com sucesso' });
         }catch(error) {
             if (error){
-                return res.status(404).json({erro: 'Not Found'});
+                return res.status(404).send({erro: 'Not Found'});
             }
         }
     },
@@ -39,10 +39,10 @@ module.exports = {
         const user_delete = await User.findByPk(req.body.id);    
         user_delete.destroy();
 
-        return res.status(200).json({ message: 'Usuário deletado com sucesso' });
+        return res.status(200).send({ message: 'Usuário deletado com sucesso' });
         }catch(error){
             if (error){
-                return res.status(404).json({erro: 'Usuário não encontrado'});
+                return res.status(404).send({erro: 'Usuário não encontrado'});
             }
         }
     },
@@ -57,10 +57,10 @@ module.exports = {
         
         const resultadoSave = await user_update.save();
 
-        return res.status(201).json({ message: 'Usuário atualizado com sucesso' });
+        return res.status(201).send({ message: 'Usuário atualizado com sucesso' });
         }catch(error) {
             if (error){
-                return res.status(404).json({erro: 'User Not Found'});
+                return res.status(404).send({erro: 'User Not Found'});
             }
         }
         

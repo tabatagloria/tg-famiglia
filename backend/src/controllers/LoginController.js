@@ -15,12 +15,16 @@ module.exports = {
             const token = jwt.sign({ id: user.id }, authConfig.secret, { 
             expiresIn: 86400,
         });
-            res.status(200).send({user, token});
+            res.status(200).send({user, auth: true, token});
         }else{
-            res.status(400).json({ error : "Invalid password" });
+            res.status(400).send({ error : "Invalid password" });
         }
       }else{
-        res.status(404).json({ error : "User does not exist" });
+        res.status(404).send({ error : "User does not exist" });
       }
     },
+    
+    async logout(req, res){
+      res.send({auth: false, token: null });
+    }
 }

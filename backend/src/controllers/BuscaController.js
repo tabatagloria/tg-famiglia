@@ -9,19 +9,22 @@ module.exports = {
         nome.toString().toLowerCase();
 
         const familiar = await Familiar.findAll({
-            attribute: [ 'nome', [Sequelize.fn('lower', Sequelize.col('nome')),] ],
+            attribute: [ 'nome', [Sequelize.fn('lower', Sequelize.col('nome'))] ],
             where: {
                 nome:
                      {
                         [Op.like]: `%${req.body.nome}%`
-                    }
-               
+                    },                
             },
             include: [{
-                association: 'documentos'
+                association: 'documentos',
+                attribute: ['local'],
+                through: { 
+                    attributes: []
+                }
             }]
             
         });
-        return res.json(familiar);
+        return res.send(familiar);
     }
 }

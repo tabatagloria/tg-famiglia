@@ -50,7 +50,7 @@ module.exports= {
             const user = await User.findByPk(user_id);
 
             if(!user){
-                return res.status(400).json({ error: 'User not found'});
+                return res.status(400).send({ error: 'User not found'});
             }
 
             const perfil_update = await Perfil.findByPk(req.body.id);
@@ -61,7 +61,7 @@ module.exports= {
             return res.status(201).json({ message: 'Alteração realizada com sucesso' });
             }catch(error){
                 if (error){
-                    return res.status(404).json({erro: 'Usuário não encontrado'});
+                    return res.status(404).send({erro: 'Usuário não encontrado'});
                 }
             }
     },
@@ -71,15 +71,15 @@ module.exports= {
         const user = await User.findByPk(user_id);
     
         if(!user){
-            return res.status(400).json({ error: 'User not found'});
+            return res.status(400).send({ error: 'User not found'});
         }
         const perfil_delete = await Perfil.findByPk(req.body.id);
         perfil_delete.destroy();
 
-        return res.status(200).json({ message: 'Perfil deletado com sucesso' });
+        return res.status(200).send({ message: 'Perfil deletado com sucesso' });
         }catch(error){
             if (error){
-                return res.status(404).json({erro: 'Perfil não encontrado'});
+                return res.status(404).send({erro: 'Perfil não encontrado'});
             }
         }
     }

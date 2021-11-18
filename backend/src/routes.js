@@ -14,6 +14,7 @@ const ParentescoController = require('./controllers/ParentescoController');
 const LoginController = require('./controllers/LoginController');
 
 
+
 const routes = express.Router();
 routes.use(morgan('dev'));
 routes.use(bodyParser.urlencoded({ extended: false }));
@@ -24,7 +25,6 @@ routes.get('/users', UserController.index);
 routes.post('/users', UserController.store);
 routes.delete('/users', UserController.delete);
 routes.put('/users', UserController.update);
-
 
 //Rotas de Familiar
 
@@ -58,6 +58,7 @@ routes.delete('/users/:user_id/cadastro_familia/:familiar_id/parentesco', authMi
 
 //Login
 routes.post('/authenticate', LoginController.login);
+routes.post('/logout', LoginController.logout);
 
 //CORS
 routes.use((req, res, next) => {

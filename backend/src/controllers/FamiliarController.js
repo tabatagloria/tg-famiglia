@@ -1,21 +1,41 @@
 const Familiar = require('../models/Familiar');
 const User = require('../models/User');
+const Documento = require('../models/Documento');
+const Parentesco = require('../models/Parentesco');
+
 
 
 module.exports= {
     
     async index(req, res){
-        try{
+        try {
             const  { user_id } = req.params;
             const user = await User.findByPk(user_id, {
-            include: { association: 'familiares' }
-        });
+                include: {
+                    association: 'familiares',
+                }        
+            });
+            const familiar = await Familiar.findAll({
+                include: [{
+                    association: 'documentos',
+                    attributes: ['local'],
+                    through: { 
+                        attributes: []
+            } },
+                    {
+                        association: 'parentescos',
+                        attributes: ['grau_parentesco'],
+                        through: { 
+                            attributes: []
+                        }
+                    }]         
+            });   
+             return res.send(familiar); 
 
-        return res.send(user.familiares); 
         }catch(error){
-        if(error){
-            return res.status(404).send({erro: 'Not Found'});
-        }
+            if(error){
+                return res.status(404).send({erro: 'Not Found'});
+            }
         }
     },
 

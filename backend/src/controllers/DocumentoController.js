@@ -15,7 +15,7 @@ module.exports= {
             through: { 
                 attributes: []}
          } }); 
-        return res.json(familiar.documentos);
+        return res.send(familiar.documentos);
 
     },
     async store(req, res) {
@@ -29,7 +29,7 @@ module.exports= {
             const familiar = await Familiar.findByPk(familiar_id);
     
             if(!user || !familiar){
-                return res.status(400).json({ error: 'User not found'});
+                return res.status(400).send({ error: 'User not found'});
             }
     
             const [ docs ] = await Documento.findOrCreate({
@@ -37,10 +37,10 @@ module.exports= {
             });
             await familiar.addDocumento(docs);
     
-            return res.status(200).json({ message: 'Cadastro realizado com sucesso' });
+            return res.status(200).send({ message: 'Cadastro realizado com sucesso' });
         } catch(error){
             if(error){
-                return res.status(404).json({erro: 'Not Found'});
+                return res.status(404).send({erro: 'Not Found'});
             }
         }
     },
@@ -55,17 +55,17 @@ module.exports= {
         const familiar = await Familiar.findByPk(familiar_id);
     
         if(!user || !familiar){
-            return res.status(400).json({ error: 'User not found'});
+            return res.status(400).send({ error: 'User not found'});
         }
         const docs = await Documento.findOne({
             where: { local }
         });
         await familiar.removeDocumento(docs);
 
-        return res.status(200).json({ message: 'Cadastro deletado com sucesso' });
+        return res.status(200).send({ message: 'Cadastro deletado com sucesso' });
         }catch(error){
             if (error){
-                return res.status(404).json({erro: 'Cadastro não encontrado'});
+                return res.status(404).send({erro: 'Cadastro não encontrado'});
             }
         }
     }
