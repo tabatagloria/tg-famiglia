@@ -42,32 +42,30 @@ module.exports= {
     async store (req, res) {
         try{
             const { user_id } = req.params;
-        const { nome, 
-            data_nascimento, 
-            casado, 
-            data_casamento,
-            falecido, 
-            data_obito} = req.body;
+            const { nome, 
+                data_nascimento, 
+                casado, 
+                data_casamento,
+                falecido, 
+                data_obito} = req.body;
                 
-        const user = await User.findByPk(user_id);
+            const user = await User.findByPk(user_id);
 
-        if(!user){
-            return res.status(400).json({ error: 'User not found'});
+            if(!user){
+                return res.status(400).json({ error: 'User not found'});
         }
-        const cadastro_familiar = await Familiar.create({
-            nome, 
-            data_nascimento, 
-            casado, 
-            data_casamento,
-            falecido, 
-            data_obito, 
-            user_id,
+            const cadastro_familiar = await Familiar.create({
+                nome, 
+                data_nascimento, 
+                casado, 
+                data_casamento,
+                falecido, 
+                data_obito, 
+                user_id,
         })
-        return res.status(200).json({ message: 'Cadastro realizado com sucesso' });
+            return res.status(200).json({ message: 'Cadastro realizado com sucesso' });
         }catch(error) {
-            if (error){
-                return res.status(404).json({erro: 'Not Found'});
-            }
+            C
         }
     },
 
